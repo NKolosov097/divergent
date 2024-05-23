@@ -43,12 +43,12 @@ const Articles = () => {
             if (e?.target?.value === "") {
                 setFilterArticles(articles)
             } else {
-              setFilterArticles(prev => ([...prev.filter(art => 
+              setFilterArticles(articles.filter(art => 
               art
                 ?.title
                 ?.toLowerCase()
                 ?.includes(e?.target?.value?.toLowerCase())
-              )]))
+              ))
             }
         }}
         />
