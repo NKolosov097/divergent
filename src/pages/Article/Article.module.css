@@ -1,0 +1,56 @@
+.section {
+    width: 100%;
+    min-height: 100%;
+    padding: 0 15px;
+}
+
+.createdAt {
+    opacity: .7;
+    text-align: left;
+}
+
+.author {
+    margin-left: 10px;
+}
+
+.title {
+    width: 100% !important;
+    margin: 0 !important;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+}
+
+.img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.body, .description  {
+    margin: 0;
+    font-size: 14px;
+}
+
+.description {
+    margin-top: 20px;
+}
+
+.commentTitle {
+    margin: 40px 0 0 0 !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+    width: 100%;
+}
+
+.commentList {
+    width: 100%;
+    list-style: none;
+    margin: 0 0 0 10px;
+    padding: 0;
+}
+
+.commentItem {
+    width: 100%;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
