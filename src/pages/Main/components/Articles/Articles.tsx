@@ -16,6 +16,14 @@ import FormItem from "antd/es/form/FormItem";
 import TextArea from "antd/es/input/TextArea";
 import { v4 as uuid } from 'uuid'
 
+  const freeImages: string[] = [
+    'https://wallpapercrafter.com/sizes/2048x1152/58977-beach-nature-4k-sea.jpg',
+    "https://www.funnyart.club/uploads/posts/2022-01/1641486753_1-www-funnyart-club-p-rasslablyayushchie-krasivie-foni-1.jpg",
+    "https://wallpapercrafter.com/sizes/2048x1152/33141-Quebec-4k-HD-wallpaper-St-Ferdinand-Canada-pink-sunrise-water-lake-sea-ocean-sky-clouds.jpg",
+    "https://www.tapeciarnia.pl/tapety/normalne/tapeta-kamienie-i-drzewa-nad-zamglonym-jeziorem.jpg",
+    "https://img.goodfon.ru/original/1920x1200/c/ab/tomhannock-vodohranilische.jpg"
+  ]
+
 const Articles = () => {
   const dispatch = useAppDispatch()
   const articles = useAppSelector(articleSelector)
@@ -45,7 +53,7 @@ const Articles = () => {
   const addComment = async (data: IArticle) => {
     const newArticle: IArticle = {
       id: uuid(),
-      photoUrl: '',
+      photoUrl: freeImages[Math.floor(Math.random()) * (freeImages?.length - 1)],
       title: data?.title,
       body: data?.body,
       author: data?.author,
@@ -166,7 +174,7 @@ const Articles = () => {
 
         <Modal 
           open={isOpenedModal}
-          title="Создание статьи"
+          title="Добавление новой статьи"
           footer={null}
           onCancel={() => {
             setIsOpenedModal(false)

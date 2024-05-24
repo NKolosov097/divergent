@@ -16,37 +16,44 @@ import { Helmet } from 'react-helmet'
 const Article = () => {
   const { id } = useParams() 
   const article = useAppSelector(state => getArticleById(state, id ?? ''))
-
   const dispatch = useAppDispatch()
+
+  const [form] = useForm();
 
   const addComment = (data: { comment: string }) => {
     dispatch(articleActions.addComment({
-      articleId: id, 
-      author: 'Колосов Никита',
-      comment: data?.comment, 
-      createdAt: '23.05.2024'
+      id: article?.id,
+      changes: {
+        comments: [
+          ...article.comments,
+          {
+            id: `${article?.id}.${article.comments.length + 1}`, 
+            author: 'Колосов Никита',
+            body: data?.comment, 
+            createdAt: new Date().toLocaleDateString()
+          }
+        ]
+      }
     }))
 
     form.resetFields()
   }
-
-  const [form] = useForm();
   
   return (
     <>
     <Helmet title={article?.title}/>
       <section className={styles.section}>
-        <Row justify='start' style={{ marginTop: 20 }}>
+        <Row justify='start' style={{ marginTop: 20, gap: 10 }}>
           <Col>
             <ReadOutlined style={{ color: 'orange', fontSize: '4em' }} />
           </Col>
 
-          <Col style={{ marginLeft: 10, flex: 1 }}>
+          <Col style={{ flex: 1, display: 'flex', flexWrap: 'wrap', gap: 5 }}>
             <span className={styles.createdAt}>
               {article?.createdAt}
             </span>
             <span className={styles.author}>
-              Автор: {article?.author}
+              Автор:&nbsp;{article?.author}
             </span>
             <Title 
               level={1}
@@ -87,11 +94,21 @@ const Article = () => {
             Комментарии
           </Title>
           <ul className={styles.commentList}>
-            {article?.comments?.map(comment => (
-              <li key={comment?.id} className={styles.commentItem}>
-                <Comment {...comment}  />
-              </li>
-            ))}
+            {article?.comments?.length > 0 
+              ? article?.comments?.map(comment => (
+                  <li key={comment?.id} className={styles.commentItem}>
+                    <Comment {...comment}  />
+                  </li>
+                ))
+              : <Row 
+                  justify='center' 
+                  align='middle' 
+                  style={{ margin: '10px 0', textAlign: 'center' }}
+                >
+                  Пока что нет ни одного комментария, но Вы можете стать первым!
+                </Row>
+            }
+
             <Row style={{ width: '100%' }}>
               <Form
                   form={form}
@@ -116,16 +133,10 @@ const Article = () => {
                   >
                       <TextArea autoSize placeholder="Вы можете оставить здесь свой комментарий" style={{ minHeight: 80 }} />
                   </FormItem>
-                  <Row justify='start' align='middle'>
+                  <Row justify='start' align='middle' style={{ marginTop: -15 }}>
                     <Button 
                       type='primary' 
-                      onClick={() => {
-                        form.submit()
-                        message.info({ 
-                          content: 'Я не успел доделать добавление комментариев 😔',
-                          duration: 4
-                        })
-                      }}
+                      onClick={() => form.submit()}
                     >
                         Сохранить комментарий
                     </Button>

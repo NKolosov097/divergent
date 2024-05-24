@@ -188,16 +188,19 @@ function App() {
         res.table("articles").toArray().then(r => {
           if (r.length === 0) {
             res.table("articles").bulkAdd(initArticles)
+          } else {
+            dispatch(articleActions.initArticles(r))
+          }
+
+          if (articles?.length === 0) {
+            dispatch(articleActions.initArticles(initArticles))
           }
         })
       })}
 
     openDbConnection()
 
-    if (articles?.length === 0) {
-      dispatch(articleActions.initArticles(initArticles))
-    }
-
+    
   }, [])
 
   return (

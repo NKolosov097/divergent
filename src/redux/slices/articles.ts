@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit"
+import { createEntityAdapter, createSlice, current } from "@reduxjs/toolkit"
 import { RootState } from "../rootReducer"
 import { db } from "../../database/db"
 import { IArticle } from "../../types/types"
@@ -36,38 +36,14 @@ export const articlesSlice = createSlice({
         },
         addComment: (state, { payload }) => {
             const addCommentDb = async () => {
-                const article = await db.articles
-                    .where({ id: payload.articleId })
-                    .toArray()
-
                 await db.articles
-                    .where({ id: payload.articleId })
-                    .modify({ comments: [...article[0].comments, {
-                        id: payload?.articleId,
-                        createdAt: payload?.createdAt,
-                        author: payload?.author,
-                        body: payload?.comment
-                    } ] })
+                    .where({ id: payload.id })
+                    .modify({ comments:  payload.changes.comments})
             }
 
             addCommentDb()
 
-            articleAdapter.updateOne(state, payload)            
-
-            // Object?.values(state?.entries)?.map(item => {
-            //     if (item?.id === payload?.articleId) {
-            //         item.comments = [...item.comments, {
-            //             id: payload?.articleId,
-            //             createdAt: payload?.createdAt,
-            //             author: payload?.author,
-            //             body: payload?.comment
-            //         }]
-            //     }
-                
-            //     console.log(item);
-
-            //     return item
-            // })
+            articleAdapter.updateOne(state, payload)
         },
         deleteArticle: (state, action) => {
             const deleteArticleFromDb = async () => {
