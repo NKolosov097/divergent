@@ -82,6 +82,7 @@ const StatisticTable = () => {
                 countComments: article?.comments?.length
             }
         ))} 
+        scroll={{ x: 350 }}
         style={{ marginBottom: 10 }}
     />
   )

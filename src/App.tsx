@@ -210,7 +210,7 @@ function App() {
               <Row 
                 justify='center' 
                 align='middle' 
-                style={{ height: '100%'}}
+                style={{ height: '970vh'}}
               >
                 <Loader />
               </Row>

@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import styles from './Main.module.css'
 import SkeletonButton from 'antd/es/skeleton/Button'
-import { Divider } from 'antd'
+import { Divider, Row } from 'antd'
 import { Helmet } from 'react-helmet'
 
 const Articles = React.lazy(() => import("./components/Articles/Articles"))
@@ -13,14 +13,16 @@ const Main = () => {
       <Helmet title='Статьи' />
       <section className={styles.section}>
         <Suspense 
-          fallback={Array.from({ length: 8 }, () => Math.random()).map((item) => (
-            <SkeletonButton
-              key={item}
-              active
-              block
-              style={{ height: 300, width: "30%", margin: "2% auto" }}
-            />
-          ))}
+          fallback={<Row justify='space-between' align='middle' style={{ width: '100%' }}>
+            {Array.from({ length: 8 }, () => Math.random()).map((item) => (
+              <SkeletonButton
+                key={item}
+                active
+                block
+                style={{ height: 300, width: "100%", margin: "2% auto" }}
+              />
+            ))}
+          </Row>}
         >
           <Articles />
         </Suspense>
@@ -32,7 +34,7 @@ const Main = () => {
             <SkeletonButton
               active
               block
-              style={{ height: 300, width: "30%", margin: "2% auto" }}
+              style={{ height: 500, width: "100%" }}
             />
           }
         >

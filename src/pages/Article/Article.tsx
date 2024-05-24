@@ -67,16 +67,20 @@ const Article = () => {
 
         <Divider style={{ margin: '10px 0' }} />
 
-        <img
-          src={article?.photoUrl}
-          alt={article?.title}
-          className={styles.img}
-        />
+        <div className={styles.imgContainer}>
+          <img
+            src={article?.photoUrl}
+            alt={article?.title}
+            className={styles.img}
+          />
+        </div>
 
         <Row>
           <p className={styles.body}>{article?.body}</p>
           <p className={styles.description}>{article?.description}</p>
         </Row>
+        
+        <Divider style={{ margin: '10px 0' }} />
 
         <Row>
           <Title level={3} className={styles.commentTitle}>

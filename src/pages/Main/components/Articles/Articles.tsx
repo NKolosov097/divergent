@@ -1,25 +1,32 @@
-import { Button, Card, Col, Row, Typography } from "antd"
+import { Button, Card, Col, Popover, Row, Typography } from "antd"
 import styles from './Articles.module.css'
 import Meta from "antd/es/card/Meta";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../../../redux/hooks";
-import { articleSelector } from "../../../../redux/slices/articles";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { articleActions, articleSelector } from "../../../../redux/slices/articles";
 import { Like } from "../../../../components/ui/LikeIcon/LikeIcon";
 import { CommentIcon } from "../../../../components/ui/CommentIcon/CommentIcon";
 import { useEffect, useState } from "react";
 import { IArticle } from "../../../../types/types";
 import Input from "antd/es/input/Input";
+import { PlusCircleOutlined } from "@ant-design/icons";
+import Modal from "antd/es/modal/Modal";
+import Form, { useForm } from "antd/es/form/Form";
+import FormItem from "antd/es/form/FormItem";
+import TextArea from "antd/es/input/TextArea";
+import { v4 as uuid } from 'uuid'
 
 const Articles = () => {
+  const dispatch = useAppDispatch()
   const articles = useAppSelector(articleSelector)
-  console.log(articles);
-  
-
   const [filterArticles, setFilterArticles] = useState<IArticle[]>(articles)
 
   useEffect(() => {
         setFilterArticles(articles)
     }, [articles])
+
+  const [isOpenedModal, setIsOpenedModal] = useState<boolean>(false)
+  const [form] = useForm()
 
   const navigate = useNavigate()
 
@@ -35,11 +42,38 @@ const Articles = () => {
   const getSize = (i: number) => 
     size.length <= i ? i - Math.floor(i / size.length) * size.length : i;
 
+  const addComment = async (data: IArticle) => {
+    const newArticle: IArticle = {
+      id: uuid(),
+      photoUrl: '',
+      title: data?.title,
+      body: data?.body,
+      author: data?.author,
+      description: data?.description,
+      comments: [],
+      createdAt: new Date().toLocaleDateString(),
+      likes: 0
+    }
+
+    dispatch(articleActions.addArticle(newArticle))
+    setIsOpenedModal(false)  
+    form.resetFields()  
+  } 
+
   return (
     <>
-      <Row justify='center' align='middle' style={{ width: '100%', marginTop: 20 }}>
+      <Row 
+        justify='space-evenly' 
+        align='middle' 
+        style={{ 
+          width: '100%', 
+          marginTop: 20, 
+          gap: 20, 
+          padding: '0 10px' 
+        }}
+      >
         <Input 
-        style={{ width: '98%' }}
+          style={{ flex: 1 }}
           placeholder="Поиск по статьям" 
           onChange={(e) =>  {
             if (e?.target?.value === "") {
@@ -52,8 +86,14 @@ const Articles = () => {
                 ?.includes(e?.target?.value?.toLowerCase())
               ))
             }
-        }}
+          }}
         />
+        <Popover trigger='hover' content="Добавление статьи">
+          <Button 
+            icon={<PlusCircleOutlined />} 
+            onClick={() => setIsOpenedModal(true)}
+          />
+        </Popover>
       </Row>
       <ul className={styles.articleList}>
             {filterArticles?.map((article, index) => (
@@ -122,7 +162,102 @@ const Articles = () => {
                 </Card>
               </Col>
             ))}
-          </ul>
+      </ul>
+
+        <Modal 
+          open={isOpenedModal}
+          title="Создание статьи"
+          footer={null}
+          onCancel={() => {
+            setIsOpenedModal(false)
+            form.resetFields()
+          }}
+        >
+          <Form
+            form={form}
+            onFinish={addComment}
+            layout="vertical"
+          >
+            <FormItem 
+              label="Название" 
+              name='title'
+              rules={[
+                {
+                  validator: (rule, value) => {
+                    if (!value.trim()) {
+                      return Promise.reject(rule.message);
+                    }
+                    return Promise.resolve();
+                  },
+                  message: "Введите название статьи",
+                },
+              ]}
+            >
+              <TextArea autoSize placeholder="Название статьи" />
+            </FormItem>
+
+            <FormItem 
+              label="Статья" 
+              name='body'
+              rules={[
+                {
+                  validator: (rule, value) => {
+                    if (!value.trim()) {
+                      return Promise.reject(rule.message);
+                    }
+                    return Promise.resolve();
+                  },
+                  message: "Введите статью",
+                },
+              ]}
+            >
+              <TextArea autoSize placeholder="Статья" />
+            </FormItem>
+
+            <FormItem 
+              label="Автор" 
+              name='author'
+              rules={[
+                {
+                  validator: (rule, value) => {
+                    if (!value.trim()) {
+                      return Promise.reject(rule.message);
+                    }
+                    return Promise.resolve();
+                  },
+                  message: "Введите автора статьи",
+                },
+              ]}
+            >
+              <TextArea autoSize placeholder="Автор" />
+            </FormItem>
+
+            <FormItem 
+              label="Описание" 
+              name='description'
+            >
+              <TextArea autoSize placeholder="Описание статьи" />
+            </FormItem>
+
+            <Row justify='end' align='middle' style={{ gap: 20 }}>
+              <Button 
+                type="primary" 
+                onClick={() => form.submit()}
+              >
+                Опубликовать
+              </Button>
+
+              <Button 
+                onClick={() => {
+                  setIsOpenedModal(false)
+                  form.resetFields()
+                }}
+              >
+                Отмена
+              </Button>
+            </Row>
+          </Form>
+        </Modal>
       </>
   )
 }
