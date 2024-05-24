@@ -12,6 +12,8 @@ import Input from "antd/es/input/Input";
 
 const Articles = () => {
   const articles = useAppSelector(articleSelector)
+  console.log(articles);
+  
 
   const [filterArticles, setFilterArticles] = useState<IArticle[]>(articles)
 
