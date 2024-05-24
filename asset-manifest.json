@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/divergent/static/css/main.83138119.css",
+    "main.js": "/divergent/static/js/main.d7a14d68.js",
+    "static/css/129.31d6cfe0.chunk.css": "/divergent/static/css/129.31d6cfe0.chunk.css",
+    "static/js/129.f0b516ef.chunk.js": "/divergent/static/js/129.f0b516ef.chunk.js",
+    "static/css/173.1adb78cb.chunk.css": "/divergent/static/css/173.1adb78cb.chunk.css",
+    "static/js/173.69858353.chunk.js": "/divergent/static/js/173.69858353.chunk.js",
+    "static/css/759.644df9e9.chunk.css": "/divergent/static/css/759.644df9e9.chunk.css",
+    "static/js/759.43a67bb9.chunk.js": "/divergent/static/js/759.43a67bb9.chunk.js",
+    "static/js/467.0eac8578.chunk.js": "/divergent/static/js/467.0eac8578.chunk.js",
+    "static/js/607.d66392d2.chunk.js": "/divergent/static/js/607.d66392d2.chunk.js",
+    "static/js/808.b70fe524.chunk.js": "/divergent/static/js/808.b70fe524.chunk.js",
+    "static/js/3.d96f325b.chunk.js": "/divergent/static/js/3.d96f325b.chunk.js",
+    "static/js/566.8a648f99.chunk.js": "/divergent/static/js/566.8a648f99.chunk.js",
+    "static/js/50.01fb9134.chunk.js": "/divergent/static/js/50.01fb9134.chunk.js",
+    "static/js/626.a6e24586.chunk.js": "/divergent/static/js/626.a6e24586.chunk.js",
+    "static/js/501.761f0a0c.chunk.js": "/divergent/static/js/501.761f0a0c.chunk.js",
+    "index.html": "/divergent/index.html",
+    "main.83138119.css.map": "/divergent/static/css/main.83138119.css.map",
+    "main.d7a14d68.js.map": "/divergent/static/js/main.d7a14d68.js.map",
+    "129.f0b516ef.chunk.js.map": "/divergent/static/js/129.f0b516ef.chunk.js.map",
+    "173.1adb78cb.chunk.css.map": "/divergent/static/css/173.1adb78cb.chunk.css.map",
+    "173.69858353.chunk.js.map": "/divergent/static/js/173.69858353.chunk.js.map",
+    "759.644df9e9.chunk.css.map": "/divergent/static/css/759.644df9e9.chunk.css.map",
+    "759.43a67bb9.chunk.js.map": "/divergent/static/js/759.43a67bb9.chunk.js.map",
+    "467.0eac8578.chunk.js.map": "/divergent/static/js/467.0eac8578.chunk.js.map",
+    "607.d66392d2.chunk.js.map": "/divergent/static/js/607.d66392d2.chunk.js.map",
+    "808.b70fe524.chunk.js.map": "/divergent/static/js/808.b70fe524.chunk.js.map",
+    "3.d96f325b.chunk.js.map": "/divergent/static/js/3.d96f325b.chunk.js.map",
+    "566.8a648f99.chunk.js.map": "/divergent/static/js/566.8a648f99.chunk.js.map",
+    "50.01fb9134.chunk.js.map": "/divergent/static/js/50.01fb9134.chunk.js.map",
+    "626.a6e24586.chunk.js.map": "/divergent/static/js/626.a6e24586.chunk.js.map",
+    "501.761f0a0c.chunk.js.map": "/divergent/static/js/501.761f0a0c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.83138119.css",
+    "static/js/main.d7a14d68.js"
+  ]
+}
