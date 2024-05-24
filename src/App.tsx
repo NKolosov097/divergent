@@ -192,11 +192,6 @@ function App() {
       })}
 
     openDbConnection()
-    dispatch(articleActions.initArticles(initArticles))
-
-    return () => {
-      dispatch(articleActions.deleteAllArticles())
-    }
   }, [])
 
   return (
