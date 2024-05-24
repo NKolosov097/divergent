@@ -73,7 +73,7 @@ const Articles = () => {
                       <Button
                         type="text"
                         className={styles.imgBtn}
-                        onClick={() => navigate(`/articles/${article.id}`)}
+                        onClick={() => navigate(`/divergent/articles/${article.id}`)}
                       >
                         <img
                           src={article?.photoUrl}
