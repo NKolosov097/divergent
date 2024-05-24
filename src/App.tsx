@@ -8,11 +8,12 @@ import { Loader } from './components/ui/Loader/Loader';
 import { Footer } from './components/Footer/Footer';
 import { db } from './database/db';
 import { IArticle } from './types/types';
-import { useAppDispatch } from './redux/hooks';
-import { articleActions } from './redux/slices/articles';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { articleActions, articleSelector } from './redux/slices/articles';
 
 function App() {
   const dispatch = useAppDispatch()
+  const articles = useAppSelector(articleSelector)
 
   useEffect(() => {
     const initArticles: IArticle[] = [
@@ -192,6 +193,11 @@ function App() {
       })}
 
     openDbConnection()
+
+    if (articles?.length === 0) {
+      dispatch(articleActions.initArticles(initArticles))
+    }
+
   }, [])
 
   return (
